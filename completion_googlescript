@@ -1,0 +1,28 @@
+function enviarPrompt() {
+  var apiKey = "Insert your API";
+  var url = "https://api.openai.com/v1/chat/completions";
+  var payload = {
+    "model": "gpt-3.5-turbo",
+    "messages": [
+        {
+            "role": "system",
+            "content": "Your name is Val. You are assistent for a vechicle repair shop. When answering try to be funny an relaxed"
+        },
+        {
+            "role": "user",
+            "content": "Hi what is your name"
+        }
+    ]
+  };
+  var options = {
+    "method": "post",
+    "contentType": "application/json",
+    "payload": JSON.stringify(payload),
+    "headers": {
+      "Authorization": "Bearer " + apiKey
+    }
+  };
+  var response = UrlFetchApp.fetch(url, options);
+  var content = response.getContentText();
+  Logger.log(content);
+}
